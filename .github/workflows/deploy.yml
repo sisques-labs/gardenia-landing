@@ -27,8 +27,11 @@ jobs:
 
       - name: Build with Astro
         # Auto-detects pnpm from pnpm-lock.yaml, runs build, and uploads
-        # the dist/ folder as a Pages artifact.
+        # the dist/ folder as a Pages artifact. Astro 7 requires Node >=22.12,
+        # so override the action's default (Node 20).
         uses: withastro/action@v3
+        with:
+          node-version: 22
 
   deploy:
     needs: build
