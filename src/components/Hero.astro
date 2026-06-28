@@ -1,0 +1,113 @@
+---
+import Icon from './Icon.astro';
+import { ui, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = ui[locale];
+---
+
+<section id="top" class="paper-grain relative overflow-hidden">
+  <!-- soft decorative glow -->
+  <div
+    class="pointer-events-none absolute -top-32 right-[-10%] h-96 w-96 rounded-full opacity-60 blur-3xl"
+    style="background: radial-gradient(circle, var(--forest-bg), transparent 70%)"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div
+    class="relative mx-auto grid max-w-6xl items-center gap-14 px-5 py-20 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:py-28"
+  >
+    <!-- Copy -->
+    <div class="max-w-xl">
+      <span class="chip forest">
+        <Icon name="sprout" class="mr-1.5 h-3.5 w-3.5" />
+        {t.hero.eyebrow}
+      </span>
+
+      <h1
+        class="mt-5 font-serif text-[2.6rem] leading-[1.08] tracking-tight text-ink sm:text-6xl"
+      >
+        {t.hero.titleLead}<span class="hand-underline text-forest">{t.hero.titleAccent}</span>{t.hero.titleTail}
+      </h1>
+
+      <p class="mt-6 text-lg leading-relaxed text-ink-2">
+        {t.hero.subtitle}
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a
+          href="#"
+          class="inline-flex h-12 items-center gap-2 rounded-full bg-forest px-6 text-base font-medium text-white shadow-sm transition-colors hover:bg-forest-2"
+        >
+          {t.hero.ctaPrimary}
+          <Icon name="arrow-right" class="h-[18px] w-[18px]" />
+        </a>
+        <a
+          href="#how"
+          class="inline-flex h-12 items-center gap-2 rounded-full border border-rule px-6 text-base font-medium text-ink-2 transition-colors hover:border-forest-3 hover:text-forest"
+        >
+          {t.hero.ctaSecondary}
+          <Icon name="arrow-down" class="h-[18px] w-[18px]" />
+        </a>
+      </div>
+
+      <p class="mt-5 font-mono text-xs text-ink-3">{t.hero.note}</p>
+    </div>
+
+    <!-- Preview card -->
+    <div class="relative">
+      <div class="card relative z-10 p-5 sm:p-6">
+        <div class="flex items-center justify-between">
+          <span class="eyebrow">{t.hero.cardCaption}</span>
+          <span class="font-hand text-xl text-forest-2">Gardenia</span>
+        </div>
+
+        <div class="mt-4 grid grid-cols-3 gap-3">
+          <div class="rounded-md bg-forest-bg p-3 text-center">
+            <Icon name="leaf" class="mx-auto h-5 w-5 text-forest" />
+            <p class="tnum mt-1 font-serif text-2xl text-ink">24</p>
+            <p class="text-xs text-ink-3">{t.hero.cardPlants}</p>
+          </div>
+          <div class="rounded-md bg-honey-bg p-3 text-center">
+            <Icon name="map" class="mx-auto h-5 w-5 text-honey-2" />
+            <p class="tnum mt-1 font-serif text-2xl text-ink">6</p>
+            <p class="text-xs text-ink-3">{t.hero.cardSpaces}</p>
+          </div>
+          <div class="rounded-md bg-terra-bg p-3 text-center">
+            <Icon name="basket" class="mx-auto h-5 w-5 text-terracotta" />
+            <p class="tnum mt-1 font-serif text-2xl text-ink">3.2kg</p>
+            <p class="text-xs text-ink-3">{t.hero.cardHarvest}</p>
+          </div>
+        </div>
+
+        <div class="dashed-rule my-4"></div>
+
+        <ul class="space-y-2.5 text-sm text-ink-2">
+          <li class="flex items-center gap-2.5">
+            <span class="cbox done"></span>
+            <span class="line-through opacity-60">{t.hero.cardTask1}</span>
+          </li>
+          <li class="flex items-center gap-2.5">
+            <span class="cbox"></span>
+            <span>{t.hero.cardTask2}</span>
+          </li>
+          <li class="flex items-center gap-2.5">
+            <span class="cbox"></span>
+            <span>{t.hero.cardTask3}</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- offset shadow card -->
+      <div
+        class="absolute inset-0 -bottom-3 left-3 -z-0 rounded-md border border-rule bg-paper-2"
+        aria-hidden="true"
+      >
+      </div>
+    </div>
+  </div>
+</section>

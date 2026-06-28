@@ -1,0 +1,18 @@
+---
+import { ui, localePath, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = ui[locale];
+const other: Locale = locale === 'en' ? 'es' : 'en';
+---
+
+<a
+  href={localePath(other)}
+  class="grid h-9 items-center rounded-full border border-rule px-3 font-mono text-xs font-medium uppercase tracking-wider text-ink-2 hover:bg-paper-2 hover:text-forest focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-2"
+  aria-label={`${t.langToggle.label}: ${t.langToggle.other}`}
+>
+  {other}
+</a>
