@@ -1,43 +1,46 @@
-# Astro Starter Kit: Minimal
+# Gardenia — Landing page
 
-```sh
-pnpm create astro@latest -- --template minimal
-```
+Marketing landing page for [Gardenia](https://github.com/sisques-labs/gardenia-web),
+the gardening companion app. Built with Astro 7 and Tailwind CSS v4, reusing the
+Gardenia design system (editorial palette, Newsreader / DM Sans / Caveat fonts)
+so the landing matches the product.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Features
 
-## 🚀 Project Structure
+- **Bilingual** — English (`/`) and Spanish (`/es/`) with an in-header language toggle.
+- **Light / dark theme** — toggle in the header, persisted in `localStorage`, with a
+  no-flash inline script and OS-preference fallback. Mirrors the web's `html.dark` convention.
+- **Design system parity** — `src/styles/{theme,palettes,components}.css` are ported from
+  `gardenia-web/src/design-system`, so colours and components stay in sync.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Project structure
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+├── components/      # Header, Hero, Features, HowItWorks, CTA, Footer, toggles, Icon
+├── i18n/ui.ts       # en/es dictionaries + locale helpers
+├── layouts/         # Layout.astro (fonts, meta, theme bootstrap)
+├── pages/
+│   ├── index.astro  # English (default locale, served at /)
+│   └── es/index.astro
+└── styles/          # Ported Gardenia design system + Tailwind entry
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Commands
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| Command        | Action                                       |
+| :------------- | :------------------------------------------- |
+| `pnpm install` | Install dependencies                         |
+| `pnpm dev`     | Start the dev server at `localhost:4321`     |
+| `pnpm build`   | Build the production site to `./dist/`       |
+| `pnpm preview` | Preview the build locally                    |
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Deployment
 
-## 🧞 Commands
+A GitHub Actions workflow (`.github/workflows/deploy.yml`) builds and deploys to
+**GitHub Pages** on every push to `main`. To enable it, set
+**Settings → Pages → Build and deployment → Source** to **GitHub Actions**.
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The site is configured for a project page at `https://sisques-labs.github.io/gardenia-landing/`
+via `site` / `base` in `astro.config.mjs`. For a custom domain, override them with the
+`SITE_URL` and `BASE_PATH` environment variables (e.g. `BASE_PATH=/`).

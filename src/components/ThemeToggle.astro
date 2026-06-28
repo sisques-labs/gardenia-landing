@@ -1,0 +1,41 @@
+---
+import Icon from './Icon.astro';
+import { ui, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = ui[locale];
+---
+
+<button
+  type="button"
+  id="theme-toggle"
+  class="btn-reset grid h-9 w-9 place-items-center rounded-full border border-rule text-ink-2 hover:bg-paper-2 hover:text-forest focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-2"
+  data-to-light={t.themeToggle.toLight}
+  data-to-dark={t.themeToggle.toDark}
+  aria-label={t.themeToggle.toDark}
+>
+  <Icon name="sun" class="hidden h-[18px] w-[18px] dark:block" />
+  <Icon name="moon" class="block h-[18px] w-[18px] dark:hidden" />
+</button>
+
+<script>
+  const btn = document.getElementById('theme-toggle');
+  if (btn) {
+    const sync = () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      btn.setAttribute(
+        'aria-label',
+        isDark ? btn.dataset.toLight ?? '' : btn.dataset.toDark ?? '',
+      );
+    };
+    sync();
+    btn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('gardenia-theme', isDark ? 'dark' : 'light');
+      sync();
+    });
+  }
+</script>
